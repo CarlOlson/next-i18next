@@ -1,5 +1,7 @@
 import { defaultConfig } from './defaultConfig'
 import { InternalConfig, UserConfig } from '../types'
+import fs from 'fs'
+import path from 'path'
 
 const deepMergeObjects = ['backend', 'detection'] as (keyof Pick<UserConfig, 'backend' | 'detection'>)[]
 
@@ -47,8 +49,6 @@ export const createConfig = (userConfig: UserConfig): InternalConfig => {
     const hasCustomBackend = userConfig?.use?.some((b) => b.type === 'backend')
 
     if (!hasCustomBackend) {
-      const fs = require('fs')
-      const path = require('path')
       const serverLocalePath = localePath
 
       //
